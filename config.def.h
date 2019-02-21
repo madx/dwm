@@ -11,15 +11,15 @@ static const char *fonts[]          = { "Droid Sans Mono Slashed for Powerline:s
 static const char dmenufont[]       = "Droid Sans Mono Slashed for Powerline:size=10";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { "#c5c8c6", "#1d1f21", "#282a2e" },
-	[SchemeSel]  = { "#ffffff", "#19b59f", "#19b59f" },
-	// { "#c5c8c6", "#a54242", "#cc6666" },  // urgent (white on red)
-	// { "#a54242", "#1d1f21", "#282a2e" },  // red
-	// { "#8c9440", "#1d1f21", "#282a2e" },  // green
-	// { "#de935f", "#1d1f21", "#282a2e" },  // orange
-	// { "#5f819d", "#1d1f21", "#282a2e" },  // blue
-	// { "#85678f", "#1d1f21", "#282a2e" },  // purple
-	// { "#5e8d87", "#1d1f21", "#282a2e" },  // cyan
+	[SchemeNorm]    = { "#c5c8c6", "#1d1f21", "#282a2e" },
+	[SchemeSel]     = { "#ffffff", "#19b59f", "#19b59f" },
+	[SchemeUrgent]  = { "#c5c8c6", "#a54242", "#cc6666" },
+	[SchemeRed]     = { "#a54242", "#1d1f21", "#282a2e" },
+	[SchemeGreen]   = { "#8c9440", "#1d1f21", "#282a2e" },
+	[SchemeOrange]  = { "#de935f", "#1d1f21", "#282a2e" },
+	[SchemeBlue]    = { "#5f819d", "#1d1f21", "#282a2e" },
+	[SchemePurple]  = { "#85678f", "#1d1f21", "#282a2e" },
+	[SchemeCyan]    = { "#5e8d87", "#1d1f21", "#282a2e" },
 };
 
 /* tagging */
@@ -74,7 +74,7 @@ static const char *decmd[] = { "de", NULL };
 static Key keys[] = {
 	/* modifier                     key            function        argument */
 	{ MODKEY,                       XK_r,          spawn,          {.v = runcmd } },
-	// { MODKEY|ShiftMask,             XK_r,          self_restart,   {0} },
+	{ MODKEY|ShiftMask,             XK_r,          selfrestart,    {0} },
 	{ MODKEY,                       XK_e,          spawn,          {.v = decmd } },
 	{ MODKEY,                       XK_s,          spawn,          {.v = shotcmd } },
 	{ MODKEY|ShiftMask,             XK_s,          spawn,          {.v = castcmd } },
