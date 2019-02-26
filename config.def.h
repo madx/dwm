@@ -10,7 +10,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Droid Sans Mono Slashed for Powerline:size=10" };
 static const char dmenufont[]       = "Droid Sans Mono Slashed for Powerline:size=10";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
+	/*                  fg         bg         border   */
 	[SchemeNorm]    = { "#c5c8c6", "#1d1f21", "#282a2e" },
 	[SchemeSel]     = { "#ffffff", "#19b59f", "#19b59f" },
 	[SchemeUrgent]  = { "#c5c8c6", "#a54242", "#cc6666" },
@@ -72,53 +72,52 @@ static const char *brightnessdowncmd[] = { "de", "brightness-", NULL };
 static const char *decmd[] = { "de", NULL };
 
 static Key keys[] = {
-	/* modifier                     key            function        argument */
-	{ MODKEY,                       XK_r,          spawn,          {.v = runcmd } },
-	{ MODKEY|ShiftMask,             XK_r,          selfrestart,    {0} },
-	{ MODKEY,                       XK_e,          spawn,          {.v = decmd } },
-	{ MODKEY,                       XK_s,          spawn,          {.v = shotcmd } },
-	{ MODKEY|ShiftMask,             XK_s,          spawn,          {.v = castcmd } },
-	{ MODKEY,                       XK_space,      spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_d,          spawn,          {.v = reloadstatuscmd } },
-	{ MODKEY,                       XK_b,          togglebar,      {0} },
-	{ MODKEY,                       XK_j,          focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,          focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,          incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,          incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,          setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,          setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j,          movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,          movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_Return,     zoom,           {0} },
-	{ MODKEY,                       XK_Tab,        view,           {0} },
-	{ MODKEY,                       XK_w,          killclient,     {0} },
-	{ MODKEY,                       XK_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_t,          setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,          setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_Return,     setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_f,          togglefloating, {0} },
-	{ MODKEY,                       XK_0,          view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,          tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,      focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_semicolon,  focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,      tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_semicolon,  tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_ampersand,                  0)
-	TAGKEYS(                        XK_eacute,                     1)
-	TAGKEYS(                        XK_quotedbl,                   2)
-	TAGKEYS(                        XK_apostrophe,                 3)
-	TAGKEYS(                        XK_parenleft,                  4)
-	TAGKEYS(                        XK_minus,                      5)
-	TAGKEYS(                        XK_egrave,                     6)
-	TAGKEYS(                        XK_underscore,                 7)
-	TAGKEYS(                        XK_ccedilla,                   8)
-	{ MODKEY|ShiftMask,             XK_q,          quit,           {0} },
-	{ 0,                            XF86XK_AudioMute, spawn,          {.v = togglemute } },
-	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,  {.v = volumeupcmd } },
-	{ 0,                            XF86XK_AudioLowerVolume,  spawn,  {.v = volumedowncmd } },
-	{ 0,                            XF86XK_MonBrightnessUp,   spawn,  {.v = brightnessupcmd } },
-	{ 0,                            XF86XK_MonBrightnessDown, spawn,  {.v = brightnessdowncmd } },
+	/* modifier                     key            function        argument                   documentation */
+	{ MODKEY,                       XK_space,      spawn,             {.v = termcmd } },           //? M-space: Launch terminal
+	{ MODKEY,                       XK_r,          spawn,             {.v = runcmd } },            //? M-r: Launch app-runner
+	{ MODKEY,                       XK_e,          spawn,             {.v = decmd } },             //? M-e: Launch de
+	{ MODKEY,                       XK_s,          spawn,             {.v = shotcmd } },           //? M-s: Take screenshot
+	{ MODKEY|ShiftMask,             XK_s,          spawn,             {.v = castcmd } },           //? M-S-s: Record screencast
+	{ MODKEY,                       XK_b,          togglebar,         {0} },                       //? M-b: Toggle bar
+	{ MODKEY|ShiftMask,             XK_b,          spawn,             {.v = reloadstatuscmd } },   //? M-S-b: Restart bar updater script
+	{ MODKEY,                       XK_j,          focusstack,        {.i = +1 } },                //? M-j: Focus next window in stack
+	{ MODKEY,                       XK_k,          focusstack,        {.i = -1 } },                //? M-k: Focus previous window in stack
+	{ MODKEY|ShiftMask,             XK_j,          movestack,         {.i = +1 } },                //? M-S-j: Swap current window with next in stack
+	{ MODKEY|ShiftMask,             XK_k,          movestack,         {.i = -1 } },                //? M-S-k: Swap current window with previous in stack
+	{ MODKEY,                       XK_i,          incnmaster,        {.i = +1 } },                //? M-i: Increase number of windows in master area
+	{ MODKEY,                       XK_d,          incnmaster,        {.i = -1 } },                //? M-d: Decrease number of windows in master area
+	{ MODKEY,                       XK_h,          setmfact,          {.f = -0.05} },              //? M-h: Increase size of master area by 5%
+	{ MODKEY,                       XK_l,          setmfact,          {.f = +0.05} },              //? M-l: Decrease size of master area by 5%
+	{ MODKEY,                       XK_Return,     zoom,              {0} },                       //? M-Return: Set current window as master window
+	{ MODKEY,                       XK_Tab,        view,              {0} },                       //? M-Tab: Toggle between current and first tag
+	{ MODKEY,                       XK_w,          killclient,        {0} },                       //? M-w: Close window
+	{ MODKEY,                       XK_t,          setlayout,         {.v = &layouts[0]} },        //? M-t: Set current tag layout to Tiled
+	{ MODKEY|ShiftMask,             XK_t,          setlayout,         {.v = &layouts[3]} },        //? M-S-t: Set current tag layout to BottomStack
+	{ MODKEY,                       XK_f,          setlayout,         {.v = &layouts[1]} },        //? M-f: Set current tag layout to Floating
+	{ MODKEY,                       XK_m,          setlayout,         {.v = &layouts[2]} },        //? M-m: Set current tag layout to Monocle
+	{ MODKEY|ShiftMask,             XK_f,          togglefloating,    {0} },                       //? M-S-f: Set the current window as floating
+	{ MODKEY,                       XK_a,          view,              {.ui = ~0 } },               //? M-a: View all tags at once
+	{ MODKEY|ShiftMask,             XK_a,          tag,               {.ui = ~0 } },               //? M-S-a: Make the current window visible on all tags
+	{ MODKEY,                       XK_comma,      focusmon,          {.i = -1 } },                //? M-comma: Focus previous monitor
+	{ MODKEY,                       XK_semicolon,  focusmon,          {.i = +1 } },                //? M-semicolon: Focus next monitor
+	{ MODKEY|ShiftMask,             XK_comma,      tagmon,            {.i = -1 } },                //? M-S-comma: Move window to previous monitor
+	{ MODKEY|ShiftMask,             XK_semicolon,  tagmon,            {.i = +1 } },                //? M-S-semicolon: Move window to next monitor
+	TAGKEYS(                        XK_ampersand,                     0)                           //? M-<1-9>: View only windows from nth tag
+	TAGKEYS(                        XK_eacute,                        1)                           //? M-C-<1-9>: Toggle windows from nth tag visibility
+	TAGKEYS(                        XK_quotedbl,                      2)                           //? M-S-<1-9>: Change window tag to n
+	TAGKEYS(                        XK_apostrophe,                    3)                           //? M-C-S-<1-9>: Add nth tag to window tags
+	TAGKEYS(                        XK_parenleft,                     4)
+	TAGKEYS(                        XK_minus,                         5)
+	TAGKEYS(                        XK_egrave,                        6)
+	TAGKEYS(                        XK_underscore,                    7)
+	TAGKEYS(                        XK_ccedilla,                      8)
+	{ MODKEY|ShiftMask,             XK_q,          quit,              {0} },                       //? M-S-q: Quit dwm
+	{ MODKEY|ShiftMask,             XK_r,          selfrestart,       {0} },                       //? M-S-r: Restart dwm
+	{ 0,                            XF86XK_AudioMute, spawn,          {.v = togglemute } },        //? XF86AudioMute: Toggle mute
+	{ 0,                            XF86XK_AudioRaiseVolume,  spawn,  {.v = volumeupcmd } },       //? XF86AudioRaiseVolume: Volume up
+	{ 0,                            XF86XK_AudioLowerVolume,  spawn,  {.v = volumedowncmd } },     //? XF86AudioLowerVolume: Volume down
+	{ 0,                            XF86XK_MonBrightnessUp,   spawn,  {.v = brightnessupcmd } },   //? XF86MonBrightnessUp: Increase brightness
+	{ 0,                            XF86XK_MonBrightnessDown, spawn,  {.v = brightnessdowncmd } }, //? XF86MonBrightnessDown: Decrease brightness
 };
 
 /* button definitions */
